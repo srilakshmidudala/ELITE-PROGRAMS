@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<!-- saved from url=(0074)https://www.hackerrank.com/challenges/py-if-else/submissions/code/86396003 -->
+<html lang="en-us" style="--font-family-text:OpenSans, Arial, Helvetica, sans-serif; --font-family-input:SourceCodePro, monaco, Courier, monospace;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  
+  <title> Python If-Else | HackerRank </title><meta name="description" id="meta-description" content="Practice using if-else conditional statements!"><meta property="og:title" id="meta-og-title" content="Python If-Else | HackerRank"><meta property="og:image" id="meta-og-image" content="https://hrcdn.net/og/default.jpg"><meta property="og:description" id="meta-og-description" content="Practice using if-else conditional statements!"><meta property="og:url" id="meta-og-url" content="https://www.hackerrank.com/challenges/py-if-else/submissions/code/86396003"><meta property="og:site_name" id="meta-og-site" content="HackerRank"><meta property="og:type" id="meta-og-type" content="website"><meta property="article:author" content="https://www.facebook.com/hackerrank"><meta name="twitter:card" id="meta-twitter-card" content="summary"><meta name="twitter:site" id="meta-twitter-site" content="@hackerrank"><meta name="twitter:url" id="meta-twitter-url" content="https://www.hackerrank.com/challenges/py-if-else/submissions/code/86396003"><meta name="twitter:title" id="meta-twitter-title" content="Python If-Else | HackerRank"><meta property="fb:app_id" id="meta-fb-id" content="347499128655783"><meta content="authenticity_token" name="csrf-param" id="csrf-param"><meta content="O6fh1NAHgqynI8gV+VfuIwo5omP0etWLTYR2zdwIcOJgPs7sUyOVjQx+yi68Vn+z3PVaJ/9sZXWiXlHFOvDhxA==" name="csrf-token" id="csrf-token">
+  <script type="text/javascript" data-cfasync="false" charset="UTF-8" async="" defer="" src="./Python If-Else _ HackerRank_files/auryc.lib.js"></script><script type="text/javascript" async="" src="./Python If-Else _ HackerRank_files/mixpanel-2-latest.min.js"></script><script type="text/javascript" async="" src="./Python If-Else _ HackerRank_files/ga.js"></script><script>/*!
+ * JavaScript Cookie v2.1.3
+ * https://github.com/js-cookie/js-cookie
+ *
+ * Copyright 2006, 2015 Klaus Hartl & Fagner Brack
+ * Released under the MIT license
+ */
+;(function (factory) {
+	var registeredInModuleLoader = false;
+	if (typeof define === 'function' && define.amd) {
+		define(factory);
+		registeredInModuleLoader = true;
+	}
+	if (typeof exports === 'object') {
+		module.exports = factory();
+		registeredInModuleLoader = true;
+	}
+	if (!registeredInModuleLoader) {
+		var OldCookies = window.Cookies;
+		var api = window.Cookies = factory();
+		api.noConflict = function () {
+			window.Cookies = OldCookies;
+			return api;
+		};
+	}
+}(function () {
+	function extend () {
+		var i = 0;
+		var result = {};
+		for (; i < arguments.length; i++) {
+			var attributes = arguments[ i ];
+			for (var key in attributes) {
+				result[key] = attributes[key];
+			}
+		}
+		return result;
+	}
+
+	function init (converter) {
+		function api (key, value, attributes) {
+			var result;
+			if (typeof document === 'undefined') {
+				return;
+			}
+
+			// Write
+
+			if (arguments.length > 1) {
+				attributes = extend({
+					path: '/'
+				}, api.defaults, attributes);
+
+				if (typeof attributes.expires === 'number') {
+					var expires = new Date();
+					expires.setMilliseconds(expires.getMilliseconds() + attributes.expires * 864e+5);
+					attributes.expires = expires;
+				}
+
+				try {
+					result = JSON.stringify(value);
+					if (/^[\{\[]/.test(result)) {
+						value = result;
+					}
+				} catch (e) {}
+
+				if (!converter.write) {
+					value = encodeURIComponent(String(value))
+						.replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
+				} else {
+					value = converter.write(value, key);
+				}
+
+				key = encodeURIComponent(String(key));
+				key = key.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent);
+				key = key.replace(/[\(\)]/g, escape);
+
+				return (document.cookie = [
+					key, '=', value,
+					attributes.expires ? '; expires=' + attributes.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+					attributes.path ? '; path=' + attributes.path : '',
+					attributes.domain ? '; domain=' + attributes.domain : '',
+					attributes.secure ? '; secure' : ''
+				].join(''));
+			}
+
+			// Read
+
+			if (!key) {
+				result = {};
+			}
+
+			// To prevent the for loop in the first place assign an empty array
+			// in case there are no cookies at all. Also prevents odd result when
+			// calling "get()"
+			var cookies = document.cookie ? document.cookie.split('; ') : [];
+			var rdecode = /(%[0-9A-Z]{2})+/g;
+			var i = 0;
+
+			for (; i < cookies.length; i++) {
+				var parts = cookies[i].split('=');
+				var cookie = parts.slice(1).join('=');
+
+				if (cookie.charAt(0) === '"') {
+					cookie = cookie.slice(1, -1);
+				}
+
+				try {
+					var name = parts[0].replace(rdecode, decodeURIComponent);
+					cookie = converter.read ?
+						converter.read(cookie, name) : converter(cookie, name) ||
+						cookie.replace(rdecode, decodeURIComponent);
+
+					if (this.json) {
+						try {
+							cookie = JSON.parse(cookie);
+						} catch (e) {}
+					}
+
+					if (key === name) {
+						result = cookie;
+						break;
+					}
+
+					if (!key) {
+						result[name] = cookie;
+					}
+				} catch (e) {}
+			}
+
+			return result;
+		}
+
+		api.set = api;
+		api.get = function (key) {
+			return api.call(api, key);
+		};
+		api.getJSON = function () {
+			return api.apply({
+				json: true
+			}, [].slice.call(arguments));
+		};
+		api.defaults = {};
+
+		api.remove = function (key, attributes) {
+			api(key, '', extend(attributes, {
+				expires: -1
+			}));
+		};
+
+		api.withConverter = init;
+
+		return api;
+	}
+
+	return init(function () {});
+}));
+</script>
+  <style>
+  .cdn-error-view {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: white;
+    z-index: 9999;
+    font-family: "Whitney SSm A", "Whitney SSm B", "Avenir", "Segoe UI", "Ubuntu", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  .cdn-error-view .error-box-wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 20px;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .cdn-error-view .error-icon {
+    text-align: center;
+  }
+  .cdn-error-view .error-title {
+    font-size: 48px;
+    margin-top: 30px;
+    margin-bottom: 0;
+    font-weight: bold;
+  }
+  .cdn-error-view .error-message {
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+  .cdn-error-view .btn-wrap {
+    margin-top: 20px;
+  }
+  .cdn-error-view .btn-reload {
+    width: 300px;
+    padding: 10px;
+    border-radius: 3px;
+    border-color: #088837;
+    border-bottom-color: #007827;
+    border-width: 1px;
+    border-style: solid;
+    color : #FFF;
+    background-color: #2ec866;
+    background-image: -webkit-gradient(linear, top left, bottom left, color-stop(0, #2ec866), color-stop(1, #29b35b));
+    background-image: -webkit-linear-gradient(top, #2ec866, #29b35b);
+    background-image: linear-gradient(top, #2ec866, #29b35b);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 4px rgba(32, 138, 70, 0.3);
+    outline: none;
+  }
+</style>
+
+
+<script>
+  var cdnLoaded = false;
+
+  var checkForWorkingCDN = (function() {
+    //this two value should come from configuration
+    var cdns = ["hrcdn.net","d3keuzeb2crhkn.cloudfront.net"];
+    var cdnUrl = Cookies.get('cdn_url') || cdns[0];
+    var filePath = "https://hrcdn.net/hackerrank/assets/cdnping-e4dfec54a83d6e6bc9baf3ce741ae25e.js";
+
+    //extract pathname from url
+    var urlRegex = /^[^#]*?:\/\/.*?(\/.*)$/ ;
+    var match = filePath.match(urlRegex);
+    if(match) filePath = match[1];
+
+    //add current cdn on first of array
+    cdns.splice(cdns.indexOf(cdnUrl), 1);
+    cdns.unshift(cdnUrl);
+
+    var cdnIndx = 0;
+
+    function tryCurrentCDN() {
+      if (cdnUrl) document.write('<script src="https://' + cdnUrl + filePath + '?' + Date.now() + '"><\/script>');
+      document.write('<script>checkForWorkingCDN();<\/script>');
+    }
+
+    //try the current cdn
+    tryCurrentCDN();
+
+    return function() {
+      if (cdnUrl && cdnLoaded) {
+        Cookies.set('cdn_url', cdnUrl, {expires: 3});
+        Cookies.set('cdn_set', 'true', {expires: 3});
+        if (cdnIndx !== 0) {
+          document.location.reload();
+        }
+
+        //if cdnUrl not loaded check the next cdn;
+      } else if (cdnUrl) {
+        //track all the failed cdn
+        var failedCdns = Cookies.get('failed_cdn_hosts');
+        if (failedCdns) {
+          failedCdns = JSON.parse(failedCdns);
+        } else {
+          failedCdns = [];
+        }
+
+        failedCdns.push(cdnUrl);
+        var fifteenMinuteFromNow = new Date();
+        fifteenMinuteFromNow.setMinutes(15);
+        Cookies.set('failed_cdn_hosts', JSON.stringify(failedCdns), {expires: fifteenMinuteFromNow});
+        Cookies.set("cdn_url_switched", "true", {expires: fifteenMinuteFromNow});
+
+        //try next cdn
+        cdnIndx += 1;
+        cdnUrl = cdns[cdnIndx];
+        tryCurrentCDN();
+
+        //if no cdn left to check and none of loaded return err
+      } else {
+        Cookies.remove('cdn_url');
+        return 'cdnerror';
+      }
+    }
+  }());
+</script><script src="./Python If-Else _ HackerRank_files/cdnping-e4dfec54a83d6e6bc9baf3ce741ae25e.js"></script><script>checkForWorkingCDN();</script>
+
+<script>
+  //track cdn related matrices
+  (function() {
+    var allCdns = ["hrcdn.net","d3keuzeb2crhkn.cloudfront.net"];
+
+    var metrics = [];
+    var defaultCdn = Cookies.get('default_cdn_url');
+
+    //method to track the events
+    function appTrack(key, attrs) {
+      attrs = attrs || {};
+      attrs.uid = Cookies.get('hackerrank_mixpanel_token')
+      metrics.push({
+        'key': key,
+        'meta_data': attrs
+      });
+    }
+
+    function sendMetrices() {
+      if (!XMLHttpRequest) return;
+      var xhr = new XMLHttpRequest();
+      var metrics_endpoint = 'https://metrics.hackerrank.com/app_metrics'; // Todo : this need to move on configuration
+
+      if (!xhr) return;
+
+      xhr.open("POST", metrics_endpoint, true);
+
+      //set xhr headers and options
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.withCredentials = true;
+
+      xhr.send(JSON.stringify({
+        data: metrics,
+        default_cdn_url: defaultCdn,
+        document_referrer: document.referrer
+      }));
+    }
+
+    var cdnUrl = Cookies.get('cdn_url');
+    var failedCdns = Cookies.get('failed_cdn_hosts');
+
+    var cdnMetrices = {};
+
+    //track used cdn host
+    if (cdnUrl) {
+      cdnMetrices['used-cdn'] = cdnUrl;
+      cdnMetrices['cdn-index'] = allCdns.indexOf(cdnUrl) + 1;
+      cdnMetrices['all-failed'] = false;
+    //track if all cdn failed (If cdnUrl is not set it means all cdn url failed)
+    } else {
+      cdnMetrices['used-cdn'] = '';
+      cdnMetrices['cdn-index'] = 999;
+      cdnMetrices['all-failed'] = true;
+    }
+
+    appTrack('cdn-metrices', cdnMetrices);
+
+    //track failed cdn
+    if (failedCdns) {
+      failedCdns = JSON.parse(failedCdns);
+      Cookies.remove('failed_cdn_hosts');
+      failedCdns.forEach(function(cdn) {
+        appTrack('failed-cdn-host', {
+          cdn: cdn
+        });
+      });
+    }
+
+    //send metrics
+    sendMetrices();
+
+  }());
+</script>
+
+
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="https://hrcdn.net/hackerrank/assets/favicon-95dc36c7e91ed5f1841649303c027edb.png">
+
+  <!-- Prefetch dns on production -->
+  
+    <link rel="dns-prefetch" href="https://hrcdn.net/">
+    <link rel="dns-prefetch" href="https://d3keuzeb2crhkn.cloudfront.net/">
+    <link rel="dns-prefetch" href="https://notifications.hackerrank.com/">
+    <link rel="dns-prefetch" href="https://api.mixpanel.com/">
+    <link rel="dns-prefetch" href="https://metrics.hackerrank.com/">
+    <link rel="preconnect" href="https://sentry.io/">
+    <link rel="dns-prefetch" href="https://sentry.io/">
+  
+
+  
+
+
+  
+    <link href="./Python If-Else _ HackerRank_files/hackerrank_r_old_trimmed-6fbf561e859b4f0339c7.css" media="all" rel="stylesheet"><link rel="stylesheet" href="./Python If-Else _ HackerRank_files/hackerrank_r_old_trimmed-6fbf561e859b4f0339c7.css">
+  
+
+  <link rel="stylesheet" type="text/css" href="./Python If-Else _ HackerRank_files/hackerrank_r_app-9555e8abc5f8e5925e02.css">
+  
+    <link rel="stylesheet" type="text/css" href="./Python If-Else _ HackerRank_files/vendors_hackerrank_r_community_hackerrank_r_work-1e554887dbda67840f10.css">
+  
+    <link rel="stylesheet" type="text/css" href="./Python If-Else _ HackerRank_files/vendors_hackerrank_r_community-1c3900cd18bb082559fe.css">
+  
+    <link rel="stylesheet" type="text/css" href="./Python If-Else _ HackerRank_files/hackerrank_r_community-a130336ab88629d8545c.css">
+  
+    <link rel="stylesheet" type="text/css" href="./Python If-Else _ HackerRank_files/vendors_hackerrank_r_challenge_hackerrank_r_challenge_list_hackerrank_r_challenge_list_v2_hackerrank_c0d6b344-cc052b0f13cd36bf8e87.css">
+  
+    <link rel="stylesheet" type="text/css" href="./Python If-Else _ HackerRank_files/vendors_custominput_hackerrank_r_challenge_hackerrank_r_code_snippets_hackerrank_r_onboarding-2ecde97bef9012b682d2.css">
+  
+    <link rel="stylesheet" type="text/css" href="./Python If-Else _ HackerRank_files/vendors_hackerrank_r_challenge_hackerrank_r_code_snippets_hackerrank_r_onboarding-5f94881e9b2c0e273fbd.css">
+  
+    <link rel="stylesheet" type="text/css" href="./Python If-Else _ HackerRank_files/hackerrank_r_challenge-cf53f1a87a979a7b9d74.css">
+  
+
+  <!-- Prefetch / preload assets on production -->
+  
+
+    <!-- Prefetch old assets -->
+    
+      <link rel="prefetch" href="https://hrcdn.net/hackerrank/assets/hackerrank-9fc5530fb7934d07e1643995db8c14d6.js">
+    
+      <link rel="prefetch" href="https://hrcdn.net/hackerrank/assets/base-4e953f9582ddc0e62ee5b02dbe2520ca.js">
+    
+      <link rel="prefetch" href="https://hrcdn.net/hackerrank/assets/hackerrank_libraries-561fe86250b9cb148e8865d4e701f9f2.js">
+    
+    <!-- Prefetch old assets end-->
+
+    <!-- preload scripts required on the same page -->
+    <link rel="preload" as="script" href="./Python If-Else _ HackerRank_files/hackerrank_r_vendor-3d37012dfd.js">
+    <link rel="preload" as="script" href="./Python If-Else _ HackerRank_files/hackerrank_r_app-9555e8abc5f8e5925e02.js">
+    <link rel="preload" as="script" href="./Python If-Else _ HackerRank_files/runtime-597735d06e945e5bf761.js">
+
+    
+      <link rel="preload" as="script" href="./Python If-Else _ HackerRank_files/vendors_hackerrank_r_community_hackerrank_r_sourcing_company_hackerrank_r_testinsights-46e189beae7a87590d2c.js">
+    
+      <link rel="preload" as="script" href="./Python If-Else _ HackerRank_files/vendors_hackerrank_r_community_hackerrank_r_work_lsp_client-c90b0a8e966c265c3a8a.js">
+    
+      <link rel="preload" as="script" href="./Python If-Else _ HackerRank_files/vendors_hackerrank_r_community_hackerrank_r_work-1e554887dbda67840f10.js">
+    
+      <link rel="preload" as="script" href="./Python If-Else _ HackerRank_files/hackerrank_r_community-a130336ab88629d8545c.js">
+    
+      <link rel="preload" as="script" href="./Python If-Else _ HackerRank_files/vendors_hackerrank_r_community-1c3900cd18bb082559fe.js">
+    
+      <link rel="preload" as="script" href="./Python If-Else _ HackerRank_files/vendors_custominput_hackerrank_r_challenge_hackerrank_r_code_snippets_hackerrank_r_onboarding-2ecde97bef9012b682d2.js">
+    
+      <link rel="preload" as="script" href="./Python If-Else _ HackerRank_files/vendors_hackerrank_r_challenge_hackerrank_r_challenge_list_hackerrank_r_challenge_list_v2_hackerrank_c0d6b344-cc052b0f13cd36bf8e87.js">
+    
+      <link rel="preload" as="script" href="./Python If-Else _ HackerRank_files/vendors_hackerrank_r_challenge_hackerrank_r_code_snippets_hackerrank_r_onboarding-5f94881e9b2c0e273fbd.js">
+    
+      <link rel="preload" as="script" href="./Python If-Else _ HackerRank_files/vendors_hackerrank_r_challenge_hackerrank_r_onboarding-2708baa1a52039402d00.js">
+    
+      <link rel="preload" as="script" href="./Python If-Else _ HackerRank_files/hackerrank_r_challenge-cf53f1a87a979a7b9d74.js">
+    
+    <!-- preload scripts end -->
+
+    <!-- Prefetch old css files -->
+    <link rel="prefetch" href="https://hrcdn.net/hackerrank/assets/hackerrank-core-5cc538439782a17d465dd1a1c7596303.css">
+    <link rel="prefetch" href="https://hrcdn.net/hackerrank/assets/hackerrank_libraries-21fce5f00a5704ab97ea6e29f618ca7f.css">
+
+    
+      <link rel="prefetch" href="https://hrcdn.net/hackerrank/assets/dashboard-2f9150980242ec5cfe8eab05dfd8a3be.css">
+    
+    <!-- Prefetch old css files end -->
+  
+  
+
+  <!-- Load promise polyfill for the non-believers -->
+  <script>
+    window.Promise || document.write('<script src="https://hrcdn.net/hackerrank/assets/promise-polyfill/promise.min-9b7934fab083223fac8be5ee5ae0b68d.js" type="text\/javascript"><\/script>');
+  </script>
+
+<script charset="utf-8" src="./Python If-Else _ HackerRank_files/vendors_hackerrank_r_community_hackerrank_r_work_lsp_client-c90b0a8e966c265c3a8a.js"></script><script charset="utf-8" src="./Python If-Else _ HackerRank_files/vendors_hackerrank_r_community_hackerrank_r_sourcing_company_hackerrank_r_testinsights-46e189beae7a87590d2c.js"></script><script charset="utf-8" src="./Python If-Else _ HackerRank_files/vendors_hackerrank_r_community_hackerrank_r_work-1e554887dbda67840f10.js"></script><script charset="utf-8" src="./Python If-Else _ HackerRank_files/vendors_hackerrank_r_community-1c3900cd18bb082559fe.js"></script><script charset="utf-8" src="./Python If-Else _ HackerRank_files/hackerrank_r_community-a130336ab88629d8545c.js"></script><script src="./Python If-Else _ HackerRank_files/container.js" data-cfasync="false" async="true" defer="true" data-vendor="userty" data-role="container" charset="utf-8"></script><link rel="prefetch" href="https://hrcdn.net/hackerrank/assets/hackerrank_r_challenge_list-4f07af4c2942c822a8c5.js"><link rel="prefetch" href="./Python If-Else _ HackerRank_files/vendors_hackerrank_r_challenge_hackerrank_r_challenge_list_hackerrank_r_challenge_list_v2_hackerrank_c0d6b344-cc052b0f13cd36bf8e87.css"><link rel="prefetch" href="https://hrcdn.net/hackerrank/assets/hackerrank_r_challenge_list_v2-df1c0a734ff014ef193a.js"><link rel="prefetch" href="https://hrcdn.net/hackerrank/assets/hackerrank_r_forum-bfe0f002ba9af4ddfb2e.js"><link rel="prefetch" href="./Python If-Else _ HackerRank_files/vendors_custominput_hackerrank_r_challenge_hackerrank_r_code_snippets_hackerrank_r_onboarding-2ecde97bef9012b682d2.css"><link rel="prefetch" href="./Python If-Else _ HackerRank_files/vendors_hackerrank_r_challenge_hackerrank_r_code_snippets_hackerrank_r_onboarding-5f94881e9b2c0e273fbd.css"><link rel="prefetch" href="./Python If-Else _ HackerRank_files/hackerrank_r_challenge-cf53f1a87a979a7b9d74.css"><link rel="prefetch" href="https://hrcdn.net/hackerrank/assets/hackerrank_r_leaderboardv2-b03e5b41df537c107044.js"><link rel="prefetch" href="https://hrcdn.net/hackerrank/assets/hackerrank_r_contest-f09a17bcdbd224db3f71.js"><link rel="prefetch" href="https://hrcdn.net/hackerrank/assets/hackerrank_r_dashboard-1fc108b1c232aa7fd2b3.js"><link rel="prefetch" href="https://hrcdn.net/hackerrank/assets/hackerrank_r_leaderboard-d6c797fac1cf3022557d.js">
+        <style>
+          html.scroll-hidden,html.scroll-hidden body{
+              overflow: hidden;
+              height:100vh;
+          }
+          html.scroll-hidden.pad-adjustment body{
+              padding-right : 15px;
+          }
+          html.scroll-hidden.pad-adjustment .fixed-elm{
+              padding-right : 15px;
+          }
+        </style>
+    <script charset="utf-8" src="./Python If-Else _ HackerRank_files/hackerrank_r_old_trimmed-6fbf561e859b4f0339c7.js"></script><link rel="prefetch" href="https://hrcdn.net/hackerrank/assets/hackerrank_r_company_header-a586b5e3a338ee857692.js"><link rel="prefetch" href="https://hrcdn.net/hackerrank/assets/hackerrank_r_jobs-c053f5496f0c09fad5fd.js"><link rel="prefetch" href="https://hrcdn.net/hackerrank/assets/hackerrank_r_profile-f289c1c9c2d640463103.js"><link rel="prefetch" href="https://hrcdn.net/hackerrank/assets/hackerrank_r_calendar-b54f741d0ddd16e421fa.js"><link rel="prefetch" href="https://hrcdn.net/hackerrank/assets/hackerrank_r_code_snippets-f3b4cd822128d09ed7d7.js"><link rel="prefetch" href="https://hrcdn.net/hackerrank/assets/hackerrank_r_onboarding-b8c55249aff502efe76d.js"><link rel="prefetch" href="https://hrcdn.net/hackerrank/assets/hackerrank_r_scoring-5a53e2b75fb8187d8ad9.js"><link rel="prefetch" href="https://hrcdn.net/hackerrank/assets/hackerrank_r_interview-c71bb0f1c6c15a724d4a.js"><link rel="prefetch" href="https://hrcdn.net/hackerrank/assets/hackerrank_r_krackjack-a6de171459c1351f5f95.js"><script charset="utf-8" src="./Python If-Else _ HackerRank_files/vendors_custominput_hackerrank_r_challenge_hackerrank_r_code_snippets_hackerrank_r_onboarding-2ecde97bef9012b682d2.js"></script><script charset="utf-8" src="./Python If-Else _ HackerRank_files/vendors_hackerrank_r_challenge_hackerrank_r_challenge_list_hackerrank_r_challenge_list_v2_hackerrank_c0d6b344-cc052b0f13cd36bf8e87.js"></script><script charset="utf-8" src="./Python If-Else _ HackerRank_files/vendors_hackerrank_r_challenge_hackerrank_r_code_snippets_hackerrank_r_onboarding-5f94881e9b2c0e273fbd.js"></script><script charset="utf-8" src="./Python If-Else _ HackerRank_files/vendors_hackerrank_r_challenge_hackerrank_r_onboarding-2708baa1a52039402d00.js"></script><script charset="utf-8" src="./Python If-Else _ HackerRank_files/hackerrank_r_challenge-cf53f1a87a979a7b9d74.js"></script><link rel="prefetch" href="./Python If-Else _ HackerRank_files/hackerrank_r_codeshell_lib-b4a914b835715d0356c9.js"><link rel="prefetch" href="https://hrcdn.net/hackerrank/assets/codeshell_editor_theme_m-87b88220f086323f5daf.js"><link rel="prefetch" href="./Python If-Else _ HackerRank_files/codeshell_editor_theme_m-87b88220f086323f5daf.css"><script charset="utf-8" src="./Python If-Else _ HackerRank_files/vendors_hackerrank_r_codeshell_lib_hackerrank_r_teams-d8a53001900c53b8cd20.js"></script><script charset="utf-8" src="./Python If-Else _ HackerRank_files/vendors_hackerrank_r_codeshell_lib-75310a30945f8e9d6d9e.js"></script><script charset="utf-8" src="./Python If-Else _ HackerRank_files/hackerrank_r_codeshell_lib-b4a914b835715d0356c9.js"></script><link rel="stylesheet" type="text/css" href="./Python If-Else _ HackerRank_files/codeshell_editor_theme_m-87b88220f086323f5daf.css"><script src="./Python If-Else _ HackerRank_files/codemirror_basic-b0da76e3e366336f599c6741d721dd67.js" async=""></script><style type="text/css">@charset "UTF-8";@font-face{font-family:FontAwesome;font-weight:400;font-style:normal;src:url(//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.eot);src:url(//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.eot#iefix) format("embedded-opentype"),url(//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.ttf) format("truetype"),url(//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff) format("woff"),url(//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2) format("woff2"),url(//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.svg#fontawesomeregular) format("svg")}@font-face{font-family:Open Sans;font-style:normal;font-weight:400;src:local("Open Sans Regular"),local("OpenSans-Regular"),url(https://fonts.gstatic.com/s/opensans/v15/mem8YaGs126MiZpBA-UFVZ0e.ttf) format("truetype")}@font-face{font-family:Open Sans;font-style:normal;font-weight:600;src:local("Open Sans SemiBold"),local("OpenSans-SemiBold"),url(https://fonts.gstatic.com/s/opensans/v15/mem5YaGs126MiZpBA-UNirkOUuhs.ttf) format("truetype")}.auryc-feedback *{font-family:Open Sans,sans-serif!important;float:none!important;text-transform:none!important;height:auto}.auryc-feedback{display:block;font-size:10px!important;line-height:1.599!important;padding:2em!important;text-align:left!important;border-radius:5px!important;resize:both!important}.auryc-fbmodal-wrapper,.auryc-feedback{font-family:Open Sans,sans-serif!important;color:#4a4a4a}.auryc-fbmodal-wrapper{display:block;position:fixed!important;z-index:2147483647!important;width:100%!important;height:100%!important;left:0!important;top:0!important;padding:0!important;margin:0!important;display:table}.auryc-fbmodal-bground{opacity:0!important}.auryc-fbmodal-bground,.auryc-fbmodal-bground-enabled{width:100%!important;height:100%!important;left:0!important;top:0!important;padding:0!important;margin:0!important;position:fixed!important;z-index:900!important}.auryc-fbmodal-bground-enabled{opacity:.79!important;-webkit-transition:opacity .4s!important;transition:opacity .4s!important;background:#292d33}.auryc-fbmodal-container{width:100%!important;height:100%!important;left:0!important;top:0!important;position:fixed!important;overflow:scroll!important;padding:0!important;margin:0!important;z-index:2147483647!important}.auryc-fbmodal-content{display:block;font-size:18px!important;margin:0 auto 100px!important;text-align:left!important;padding:9.5px!important;height:100%!important;width:calc(99vw - 19px)!important;-webkit-font-smoothing:antialiased!important;-moz-osx-font-smoothing:grayscale!important}@media only screen and (min-width:480px){.auryc-fbmodal-content{max-width:540px!important}}.auryc-fbmodal-body{display:block;opacity:0!important;width:100%!important}.auryc-fbmodal-body-enabled{background:#fff;-webkit-box-shadow:0 0 39px 0 rgba(0,0,0,.3)!important;box-shadow:0 0 39px 0 rgba(0,0,0,.3)!important;display:block;border-radius:4.9px!important;opacity:1!important;-webkit-transition:opacity .4s ease!important;transition:opacity .4s ease!important;width:100%!important;text-align:center!important}.auryc-fbmodal-head{opacity:0!important}.auryc-fbmodal-head,.auryc-fbmodal-head-enabled{width:100%!important;display:block;clear:both!important}.auryc-fbmodal-head-enabled{opacity:1!important;-webkit-transition:opacity .4s ease!important;transition:opacity .4s ease!important}.auryc-fb-modal-closebtn{top:14px!important;left:-14px!important;width:20px!important;height:20px!important;float:right!important;opacity:.49!important;position:relative!important}.auryc-fb-modal-closebtn:hover{cursor:pointer!important;opacity:1!important}#auryc-feedback-canvas{margin-top:15px!important;position:relative!important;text-align:right!important;width:100%!important}.auryc-feedback-fbquestiongroup{display:none}.auryc-feedback-fbquestiongroup-shown{display:block}#auryc-feedback-tab.auryc-feedback-tab-loc-br-horizontal{margin-right:.59em!important;left:auto!important;right:0!important;position:fixed!important;top:auto!important;display:block;-webkit-box-sizing:border-box!important;box-sizing:border-box!important;bottom:.59em;overflow:hidden!important}#auryc-feedback-tab.auryc-feedback-tab-loc-br-horizontal .auryc-feedback-tab-label{padding-left:.29em!important}#auryc-feedback-tab.auryc-feedback-tab-loc-br{margin-right:.29em!important;left:auto!important;right:0!important;top:auto!important;bottom:.59em;-webkit-transform:rotate(-90deg) translate(100%,22%)!important;transform:rotate(-90deg) translate(100%,22%)!important;-webkit-transform-origin:100% 100%!important;transform-origin:100% 100%!important;border-radius:5px 5px 0 0!important;-webkit-box-shadow:0 -2px 4px rgba(0,0,0,.1)!important;box-shadow:0 -2px 4px rgba(0,0,0,.1)!important}#auryc-feedback-tab.auryc-feedback-tab-loc-br .auryc-feedback-tab-label:after{content:"\f106";font-family:fontawesome!important;padding-left:10px!important}#auryc-feedback-tab.auryc-feedback-tab-loc-bl-horizontal{margin-right:.59em!important;position:fixed!important;right:auto!important;-webkit-box-sizing:border-box!important;box-sizing:border-box!important;overflow:hidden!important;margin-left:.59em!important;top:auto!important;display:block;bottom:1.19em!important}#auryc-feedback-tab.auryc-feedback-tab-loc-bl-horizontal .auryc-feedback-tab-label{padding-right:.29em!important;padding-left:.29em!important}#auryc-feedback-tab.auryc-feedback-tab-loc-bl{right:auto!important;margin-left:.59em!important;top:auto!important;bottom:1.2em!important;-webkit-transform:translate(-8%,100%) rotate(-90deg)!important;transform:translate(-8%,100%) rotate(-90deg)!important;-webkit-transform-origin:0 0!important;transform-origin:0 0!important;border-radius:0 0 5px 5px!important;-webkit-box-shadow:0 -2px 4px rgba(0,0,0,.1)!important;box-shadow:0 -2px 4px rgba(0,0,0,.1)!important}#auryc-feedback-tab.auryc-feedback-tab-loc-bl .auryc-feedback-tab-label:after{content:"\f107";font-family:fontawesome!important;padding-left:10px!important}#auryc-feedback-tab.auryc-feedback-tab-loc-tr-horizontal{margin-right:.59em!important;position:fixed!important;left:auto!important;right:0!important;top:.59em!important;-webkit-box-sizing:border-box!important;box-sizing:border-box!important;overflow:hidden!important;margin-left:.59em!important;display:block;bottom:auto!important}#auryc-feedback-tab.auryc-feedback-tab-loc-tr-horizontal .auryc-feedback-tab-label{padding-left:.29em!important}#auryc-feedback-tab.auryc-feedback-tab-loc-tr{-webkit-transform:rotate(-90deg) translateY(-78%)!important;transform:rotate(-90deg) translateY(-78%)!important;-webkit-transform-origin:100% 0!important;transform-origin:100% 0!important;border-radius:5px 5px 0 0!important;-webkit-box-shadow:0 -2px 4px rgba(0,0,0,.1)!important;box-shadow:0 -2px 4px rgba(0,0,0,.1)!important;left:auto!important;right:0!important;top:.59em!important;position:fixed!important;margin-right:.29em!important}#auryc-feedback-tab.auryc-feedback-tab-loc-tr .auryc-feedback-tab-label:after{content:"\f106";font-family:fontawesome!important;padding-left:10px!important}#auryc-feedback-tab.auryc-feedback-tab-loc-tl-horizontal{position:fixed!important;left:0!important;right:auto!important;top:.59em!important;-webkit-box-sizing:border-box!important;box-sizing:border-box!important;overflow:hidden!important;margin-left:.59em!important;display:block;bottom:auto!important}#auryc-feedback-tab.auryc-feedback-tab-loc-tl-horizontal .auryc-feedback-tab-label{padding-right:.29em!important;padding-left:.29em!important}#auryc-feedback-tab.auryc-feedback-tab-loc-tl{-webkit-transform:rotate(-90deg) translate(-100%,-22%)!important;transform:rotate(-90deg) translate(-100%,-22%)!important;-webkit-transform-origin:0 0!important;transform-origin:0 0!important;border-radius:0 0 5px 5px!important;-webkit-box-shadow:0 -2px 4px rgba(0,0,0,.1)!important;box-shadow:0 -2px 4px rgba(0,0,0,.1)!important;right:auto!important;margin-left:.29em!important;top:.59em!important}#auryc-feedback-tab.auryc-feedback-tab-loc-tl .auryc-feedback-tab-label:after{content:"\f107";font-family:fontawesome!important;padding-left:10px!important}#auryc-feedback-tab.auryc-feedback-tab-loc-cl-horizontal{position:fixed!important;left:0!important;right:auto!important;top:50%!important;-webkit-box-sizing:border-box!important;box-sizing:border-box!important;overflow:hidden!important;margin-left:.59em!important;display:block;bottom:auto!important}#auryc-feedback-tab.auryc-feedback-tab-loc-cl-horizontal .auryc-feedback-tab-label{padding-right:.29em!important;padding-left:.29em!important}#auryc-feedback-tab.auryc-feedback-tab-loc-cl{right:auto!important;margin-left:.29em!important;top:50%!important;-webkit-transform:rotate(-90deg) translate(-50%,-22%)!important;transform:rotate(-90deg) translate(-50%,-22%)!important;-webkit-transform-origin:0 0!important;transform-origin:0 0!important;border-radius:0 0 5px 5px!important;-webkit-box-shadow:0 -2px 4px rgba(0,0,0,.1)!important;box-shadow:0 -2px 4px rgba(0,0,0,.1)!important}#auryc-feedback-tab.auryc-feedback-tab-loc-cl .auryc-feedback-tab-label:after{content:"\f107";font-family:fontawesome!important;padding-left:10px!important}#auryc-feedback-tab.auryc-feedback-tab-loc-cr-horizontal{position:fixed!important;left:auto!important;right:0!important;top:50%!important;-webkit-box-sizing:border-box!important;box-sizing:border-box!important;overflow:hidden!important;margin-left:.59em!important;display:block;bottom:auto!important}#auryc-feedback-tab.auryc-feedback-tab-loc-cr-horizontal .auryc-feedback-tab-label{padding-left:.29em!important}#auryc-feedback-tab.auryc-feedback-tab-loc-cr{-webkit-transform:rotate(-90deg) translate(50%,-78%)!important;transform:rotate(-90deg) translate(50%,-78%)!important;-webkit-transform-origin:100% 0!important;transform-origin:100% 0!important;border-radius:5px 5px 0 0!important;-webkit-box-shadow:0 -2px 4px rgba(0,0,0,.1)!important;box-shadow:0 -2px 4px rgba(0,0,0,.1)!important;position:fixed!important;left:auto!important;right:0!important;top:50%!important;-webkit-box-sizing:border-box!important;box-sizing:border-box!important;overflow:hidden!important;margin-right:.29em!important;display:block;bottom:auto!important}#auryc-feedback-tab.auryc-feedback-tab-loc-cr .auryc-feedback-tab-label:after{content:"\f106";font-family:fontawesome!important;padding-left:10px!important}.auryc-fb-validation-msg-section{font-family:Open Sans,sans-serif!important;font-size:14px!important;color:#fc6a56;border-radius:.49em!important;margin-bottom:.49em!important;margin-top:2em!important;display:none;text-align:left!important}#auryc-feedback-tab{position:fixed!important;top:0!important;left:0!important;display:block;background:#692893;opacity:.85!important;cursor:pointer!important;-webkit-box-sizing:border-box!important;box-sizing:border-box!important;z-index:2147483647!important;font-size:80%!important;-webkit-font-smoothing:antialiased!important;-moz-osx-font-smoothing:grayscale!important}.auryc-feedback-tab-label{font-family:Open Sans,sans-serif!important;color:#fff;font-size:14px!important;z-index:5!important;font-weight:400!important;line-height:40px!important}.auryc-feedback-tab-label:after{content:"\f106";font-family:fontawesome!important;padding-left:10px!important}.auryc-feedback div,.auryc-feedback fieldset,.auryc-feedback h1,.auryc-feedback h2,.auryc-feedback img,.auryc-feedback label,.auryc-feedback p,.auryc-feedback span{margin:0!important;font:inherit!important;padding:0!important;border:0!important;vertical-align:baseline!important}#auryc-feedback-tab.auryc-feedback-tab-dt-desktop,#auryc-feedback-tab.auryc-feedback-tab-dt-tablet{height:40px!important;display:block;-webkit-box-shadow:0 0 .8em 0 rgba(1,1,1,.39)!important;-moz-box-shadow:0 0 .8em 0 rgba(1,1,1,.39)!important;border-radius:100px;-webkit-box-shadow:0 -2px 4px rgba(0,0,0,.1)!important;box-shadow:0 -2px 4px rgba(0,0,0,.1)!important;padding:0 15px!important;overflow:hidden!important}#auryc-feedback-tab.auryc-feedback-tab-dt-smartphone{width:60px!important;height:60px!important;display:-webkit-box!important;display:-ms-flexbox!important;display:flex;-webkit-box-align:center!important;-ms-flex-align:center!important;align-items:center!important;-webkit-box-pack:center!important;-ms-flex-pack:center!important;justify-content:center!important;background:#2f8cff;border-radius:50%!important;cursor:pointer!important;fill:#fff;-webkit-box-shadow:0 1px 5px rgba(0,0,0,.06),0 2px 30px rgba(0,0,0,.12)!important;box-shadow:0 1px 5px rgba(0,0,0,.06),0 2px 30px rgba(0,0,0,.12)!important}@media print{#auryc-feedback-tab.auryc-feedback-tab-dt-desktop,#auryc-feedback-tab.auryc-feedback-tab-dt-tablet{display:none!important}}.auryc-feedback-spinner{display:block;top:1!important;left:1!important;position:absolute!important;z-index:2147483647!important}.auryc-feedback ::-webkit-input-placeholder{font-style:italic!important}.auryc-feedback :-moz-placeholder,.auryc-feedback ::-moz-placeholder{font-style:italic!important}.auryc-feedback :-ms-input-placeholder{font-style:italic!important}.auryc-fbmodal-body-selection{color:#4a4a4a;text-align:left!important;padding:25px 15px 15px!important}.auryc-fbmodal-body-selection .auryc-fbmodal-body-selection_title{font-size:18px!important;font-weight:600!important;line-height:24px!important}.auryc-fbmodal-body-selection .auryc-feedback-general,.auryc-fbmodal-body-selection .auryc-feedback-screenshot{background-color:#f6f6f6;border:1px solid #cfcfcf;border-radius:3px!important;-webkit-box-sizing:border-box!important;box-sizing:border-box!important;cursor:default!important;display:table;margin-top:10px!important;padding:5px!important;white-space:nowrap!important;width:100%!important}.auryc-fbmodal-body-selection .auryc-feedback-general .auryc-feedback_option_row,.auryc-fbmodal-body-selection .auryc-feedback-screenshot .auryc-feedback_option_row{display:table-row;height:60px!important}.auryc-fbmodal-body-selection .auryc-feedback-general .auryc-feedback_option_column,.auryc-fbmodal-body-selection .auryc-feedback-screenshot .auryc-feedback_option_column{display:table-cell;vertical-align:middle!important}.auryc-fbmodal-body-selection .auryc-feedback-general .auryc-feedback-selection__label1,.auryc-fbmodal-body-selection .auryc-feedback-screenshot .auryc-feedback-selection__label1{font-size:16px!important;font-weight:600!important;line-height:22px!important}.auryc-fbmodal-body-selection .auryc-feedback-general .auryc-feedback-selection__label2,.auryc-fbmodal-body-selection .auryc-feedback-screenshot .auryc-feedback-selection__label2{font-size:14px!important;font-weight:400!important;line-height:19px!important;white-space:normal!important}.auryc-fbmodal-body-selection .auryc-feedback-general .auryc-feedback-selection__labels,.auryc-fbmodal-body-selection .auryc-feedback-screenshot .auryc-feedback-selection__labels{padding-left:5px!important;vertical-align:middle!important}.auryc-fbmodal-body-selection .auryc-feedback-general .auryc-feedback_option_image,.auryc-fbmodal-body-selection .auryc-feedback-screenshot .auryc-feedback_option_image{width:50px!important}.auryc-fbmodal-body-selection .auryc-feedback-general img,.auryc-fbmodal-body-selection .auryc-feedback-screenshot img{vertical-align:middle!important;padding:0 5px!important}.auryc-fbmodal-body-selection .auryc-feedback-general:hover,.auryc-fbmodal-body-selection .auryc-feedback-screenshot:hover{background-color:#e4ecfc!important}div [dataType=auryc-fbq]>p{display:block;font-size:14px!important;text-align:center!important;font-weight:400!important;color:#4a4a4a;letter-spacing:0!important}.auryc-fbmodal-body-fbform,.auryc-fbmodal-body-selection{display:none}@media (min-width:1024px){.auryc-feedback{text-align:left!important}.auryc-feedback .auryc-fb-starrating-field{font-size:15px!important}}.auryc-feedback .auryc-feedback-fbform-headtag{font-family:light,Open Sans,sans-serif!important;margin-bottom:10px!important;line-height:1.2!important;color:#4a4a4a;letter-spacing:-.1px!important}.auryc-feedback .auryc-feedback-fbform-headtag-h1{font-size:25px!important;font-family:Open Sans,sans-serif!important;font-weight:400!important;text-align:center!important;width:inherit!important;text-transform:none!important}.auryc-feedback .auryc-feedback-fbform-headtag-h2{font-size:2.4em!important}.auryc-feedback .auryc-feedback-fblabel p{font-weight:600!important;font-size:14px!important;color:#4a4a4a;letter-spacing:0!important}.auryc-feedback p{font-size:1.2em!important;line-height:1.2!important;margin-bottom:.2em!important}.auryc-feedback .auryc-feedback-title-section{font-family:Open Sans,sans-serif!important;text-align:center!important;font-size:14px!important;margin-bottom:20px!important}.auryc-feedback .auryc-feedback-title-section .auryc-feedback-fblogo{height:3.49em!important;margin:0 auto 1.7em!important;display:block;max-height:144px!important;width:auto!important}.auryc-feedback .auryc-fb-starrating-field{width:96%!important;color:#cfcfcf!important;display:block;margin:0 auto!important;text-align:center!important;text-indent:0!important;white-space:nowrap!important}.auryc-feedback .auryc-fb-starrating-field label{color:#cfcfcf;float:none!important;height:auto!important}.auryc-fbmodal-body-fbform-enabled{display:block}#post-fb-resp-button{display:inline-block;background:#22c6f3;border:.9px solid #20c8f7;border-radius:2.9px!important;padding:.02em 4.49em!important;color:#555;resize:none!important;width:199px!important;height:35px!important;margin-top:19px!important;font-size:14px!important}.auryc-feedback .auryc-starrating-section{margin-bottom:.49em!important;font-size:18px!important;display:block;margin-top:10px!important}div[dataType=auryc-fbq]{display:block;margin-top:10px!important}.auryc-feedback-fbquestion{display:block}.auryc-feedback .auryc-feedback-fblabel{display:block;text-align:center!important;font-size:12px!important;font-family:Open Sans,sans-serif!important;color:#4a4a4a;font-weight:600!important;margin-bottom:0!important;float:none!important;height:auto!important}.auryc-feedback .auryc-feedback-fbemail,.auryc-feedback div[dataType=auryc-feedback-checkbox]>label,.auryc-feedback div[dataType=auryc-feedback-radio]>label{border:1px solid #979797!important;border-radius:3px!important}.auryc-feedback .auryc-feedback-fbemail,.auryc-feedback .auryc-feedback-question-textarea,.auryc-feedback div[dataType=auryc-feedback-checkbox]>label,.auryc-feedback div[dataType=auryc-feedback-radio]>label{position:relative!important;background:#fff!important;width:100%!important;font-size:1.4em!important;resize:none!important;padding:.49em!important;-webkit-box-sizing:border-box!important;box-sizing:border-box!important;text-align:left!important;-webkit-appearance:none!important;-moz-appearance:none!important;-ms-appearance:none!important;-o-appearance:none!important;appearance:none!important}.auryc-feedback .auryc-feedback-question-textarea{border-radius:3px!important;height:54px!important;border:1px solid #cfcfcf!important}.auryc-feedback .auryc-feedback-fbtarea{display:block;position:relative!important;margin:0!important;text-align:right!important}.auryc-feedback .auryc-feedback-fbtarea .auryc-feedback-fbctrl{padding-bottom:1.2em!important;margin:0!important;max-width:100%!important}.auryc-feedback .auryc-feedback-questiongroup-choose{position:relative!important;border-radius:none!important;background:#fff!important;width:100%!important;font-size:1.4em!important;resize:none!important;padding:.49em!important;-webkit-box-sizing:border-box!important;box-sizing:border-box!important;text-align:left!important;-webkit-appearance:none!important;-moz-appearance:none!important;-ms-appearance:none!important;-o-appearance:none!important;appearance:none!important;border:none!important;outline:none!important;color:#313943!important}.auryc-feedback .auryc-feedback-footer-section{display:block;position:relative!important;text-align:center!important}.auryc-feedback .auryc-feedback-footer-section .auryc-fbmodal-footer{background:inherit!important;position:relative!important;left:1px!important;display:table;font-size:10px!important;color:#4a4a4a!important;letter-spacing:-.35px!important;z-index:3!important;width:100%!important}.auryc-fbmodal-footer span{display:inline}.auryc-feedback .auryc-feedback-footer-section .auryc-fbmodal-footer img{display:inline;position:relative!important;top:-1px!important;left:1px!important;vertical-align:middle!important}.auryc-feedback .auryc-feedback-questiongroup-choose:after{position:absolute!important;top:30%!important;right:1em!important;content:"";padding-left:5px!important;color:inherit!important;pointer-events:none!important;font-family:FontAwesome!important;line-height:1!important;-moz-osx-font-smoothing:grayscale!important;font-weight:400!important;font-stretch:normal!important;-webkit-font-feature-settings:normal!important;font-feature-settings:normal!important;font-variant:normal!important;font-size:inherit!important;text-rendering:auto!important;-webkit-font-smoothing:antialiased!important}.auryc-feedback .auryc-feedback-questiongroup-choose .auryc-fb-questiongroup-selector{position:absolute!important;left:0!important;top:0!important;width:100%!important;text-transform:none!important;cursor:pointer!important;font-size:14px!important;border:1px solid #838aa4!important;border-radius:3px!important;background:#fff!important;padding:4px!important;font-weight:600!important;color:#292e3f!important;-webkit-appearance:none!important;-moz-appearance:none!important;-ms-appearance:none!important;-o-appearance:none!important;appearance:none!important}.auryc-fb-questiongroup-selector::-ms-expand{display:none}.auryc-fb-questiongroup-selector:focus{-webkit-box-shadow:0 0 1px 1px #23c6f5!important;box-shadow:0 0 1px 1px #23c6f5!important}.auryc-feedback .auryc-close-btn{width:222px!important;height:36px!important;position:relative!important;padding:.29em 1.9em!important;font-family:Open Sans,sans-serif!important;font-size:18px!important;line-height:0!important;text-align:center!important;color:#555!important;font-weight:400!important;display:inline-block;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;border-radius:0!important;background-color:#464c55;border:1px solid #464c55;cursor:pointer!important;outline:0!important;margin:0 auto!important}.auryc-feedback .auryc-feedback-select-button{font-family:Open Sans,sans-serif!important;font-size:14px!important;font-weight:400!important;color:#4a4a4a!important;text-align:left!important}.auryc-feedback .post-fb-resp-button{padding:.49em .6999em!important;line-height:1.618!important;width:100%!important}.auryc-feedback .auryc-feedback-btn,.auryc-feedback .post-fb-resp-button{display:inline-block;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;border-radius:0!important;background-color:#464c55;border:1px solid #464c55;cursor:pointer!important;color:#fff;font-size:1.7em!important;text-align:center!important;outline:0!important;font-weight:400!important;-webkit-transition:all .14s ease!important;transition:all .14s ease!important;margin:0 auto!important}.auryc-feedback .auryc-feedback-btn{padding:.49em .69999em!important;line-height:1.599!important}.auryc-feedback .auryc-fb-starrating-field .auryc-fb-starrating-field-staricon{font-size:6em!important;cursor:pointer!important;border:0!important}.auryc-feedback .auryc-fb-starrating-field .auryc-fb-starrating-field-staricon:before{font-family:Open Sans,sans-serif!important;content:""}.auryc-feedback .auryc-fb-starrating-field--disabled{color:#eaebec!important}.auryc-feedback .auryc-fb-starrating-field--disabled .auryc-fb-starrating-field-staricon{cursor:default!important;border:0!important}.auryc-feedback .auryc-fb-starrating-field input[type=radio]{display:none}.auryc-feedback input[type=text],.auryc-feedback textarea{font-family:Open Sans,sans-serif!important;height:100%!important;float:none!important;height:auto!important}.auryc-feedback .auryc-fb-starrating-field .auryc-fb-starrating-field-staricon:before,.auryc-feedback .auryc-fb-starrating-field label:before,.auryc-feedback .auryc-feedback-checkbox:before,.auryc-feedback .auryc-feedback-radio:before{font-family:FontAwesome!important;line-height:1!important;font-style:normal!important;font-weight:400!important;font-stretch:normal!important;-webkit-font-feature-settings:normal!important;font-feature-settings:normal!important;font-variant:normal!important;font-size:inherit!important;text-rendering:auto!important;-webkit-font-smoothing:antialiased!important;-moz-osx-font-smoothing:grayscale!important}.auryc-feedback .auryc-fb-starrating-field input.auryc-fb-starrating-field-staricon+label{padding:0!important;font-size:2em!important;cursor:pointer!important;display:inline;margin:0!important;border:0!important}.auryc-feedback .auryc-fb-starrating-field label:before{-webkit-transition:color .15s ease!important;transition:color .15s ease!important;content:"★";background:0 0!important;height:auto!important;width:auto!important;top:0!important}.auryc-feedback .auryc-fb-starrating-field input.auryc-fb-starrating-field-staricon:checked+label:before{content:"★";color:#f8c454;background:0 0!important}.auryc-feedback .auryc-fb-starrating-field label.auryc-ratings-chosen:before{color:#f8c454;content:"★"}.auryc-feedback .auryc-nps__container{border:1px solid #9d9d9d!important;border-radius:5px!important;padding:10px 0!important;background-color:#f7f7f7!important}@media only screen and (min-device-width:320px) and (max-device-width:360px) and (-webkit-min-device-pixel-ratio:2) and (orientation:portrait){.auryc-feedback .auryc-nps__container{padding:10px 0 0!important}}.auryc-feedback .auryc-nps__container .nps-rating{padding:10px 10px 0!important;margin:auto auto 10px!important;min-height:35px!important;text-align:justify!important}.auryc-feedback .auryc-nps__container .nps-rating .nps-rating__labels{display:block}.auryc-feedback .auryc-nps__container .nps-rating .nps_rating_left_label,.auryc-feedback .auryc-nps__container .nps-rating .nps_rating_right_label{font-size:12px;color:#9b9b9b}.auryc-feedback .auryc-nps__container .nps-rating .nps_rating_left_label{float:left!important}.auryc-feedback .auryc-nps__container .nps-rating .nps_rating_right_label{float:right!important}.auryc-feedback .auryc-nps__container .nps-rating .nps-rating__badges{display:block;text-align:center!important;min-height:30px!important}.auryc-feedback .auryc-nps__container .nps-rating .nps-rating__badges label{padding:0!important;cursor:pointer!important;display:inline;margin:0!important;border:0!important}.auryc-feedback .auryc-nps__container .nps-rating .nps-rating__badges label:before{display:none}.auryc-feedback .auryc-nps__container .nps-rating .nps-rating__badges label:hover{color:#fff;background-color:#23c6f5}.auryc-feedback .auryc-nps__container .nps-rating .nps-rating__badges .nps-rating__badge{border-radius:50%!important;width:28px!important;padding:2px!important;font-size:12px!important;line-height:1em!important;position:relative!important;background-color:#e2e2e2;display:inline-block;-webkit-box-sizing:border-box!important;box-sizing:border-box!important}.auryc-feedback .auryc-nps__container .nps-rating .nps-rating__badges .aurycNpsRatingChecked,.auryc-feedback .auryc-nps__container .nps-rating .nps-rating__badges input[type=radio]:checked+label{color:#fff;background-color:#23c6f5}.auryc-feedback .auryc-nps__container .nps-rating .nps-rating__badges .nps-rating__badge .nps-rating__height_fix{margin-top:100%!important}.auryc-feedback .auryc-nps__container .nps-rating .nps-rating__badges .nps-rating__badge .nps-rating__num{position:absolute!important;left:0!important;top:50%!important;height:100%!important;width:100%!important;text-align:center!important;margin-top:-6px!important}.auryc-feedback .auryc-nps__container .nps-rating .nps-rating__badges .stretch{width:100%!important;display:inline-block;font-size:0!important;line-height:0!important;padding:0!important;margin:0!important;height:0!important}.auryc-feedback .auryc-nps__container .nps-rating .nps-rating__badges input[type=radio]{display:none}@media only screen and (min-width:361px) and (max-width:420px) and (-webkit-min-device-pixel-ratio:2) and (orientation:portrait){.auryc-feedback .auryc-nps__container .nps-rating .nps-rating__badges .nps-rating__badge{width:20px!important}}@media only screen and (min-width:320px) and (max-width:360px) and (-webkit-min-device-pixel-ratio:2) and (orientation:portrait){.auryc-feedback .auryc-nps__container .nps-rating .nps-rating__badges .nps-rating__badge{margin:3px 5px!important}}@media only screen and (min-width:500px){.auryc-feedback .auryc-nps__container .nps-rating{padding:10px 30px 0!important}}.auryc-feedback .auryc-feedback-checkbox,.auryc-feedback .auryc-feedback-radio{text-align:left!important;display:block;cursor:pointer!important}.auryc-feedback .auryc-feedback-checkbox:nth-child(1n+2),.auryc-feedback .auryc-feedback-radio:nth-child(1n+2){margin-top:.49em!important}.auryc-feedback .auryc-feedback-checkbox input,.auryc-feedback .auryc-feedback-radio input{display:none}.auryc-feedback .auryc-feedback-checkbox:before{content:"";padding-left:.29em!important;padding-right:.29em!important;color:inherit;opacity:.3}.auryc-feedback .auryc-feedback-checkbox.aurycChecked:before{content:"";opacity:1;color:#23c6f5}.auryc-feedback .auryc-feedback-radio:before{padding-left:.29em!important;padding-right:.29em!important;color:inherit;opacity:.3;content:"\f10c"}.auryc-feedback .auryc-feedback-radio.aurycChecked:before{content:"\f111";opacity:1;color:#23c6f5}.aurycIsRequired{color:#ff4c88!important}</style><script src="./Python If-Else _ HackerRank_files/python-0f934b989dae6fa7681aa4bce99b1728.js" async=""></script></head>
+<body id="hr_v2" class="hr-community">
+  <div class="cdn-error-view" style="display:none;">
+  <div class="error-box-wrap">
+    <div class="error-icon">
+      <svg x="0px" y="0px" width="80px" height="80px" viewBox="0 0 367.011 367.01" style="enable-background:new 0 0 367.011 367.01;" xml:space="preserve">
+        <g>
+         <g>
+          <path d="M365.221,329.641L190.943,27.788c-1.542-2.674-4.395-4.318-7.479-4.318c-3.084,0-5.938,1.645-7.48,4.318L1.157,330.584    c-1.543,2.674-1.543,5.965,0,8.639c1.542,2.674,4.395,4.318,7.48,4.318h349.65c0.028,0,0.057,0,0.086,0    c4.77,0,8.638-3.863,8.638-8.639C367.011,332.92,366.342,331.1,365.221,329.641z M23.599,326.266L183.464,49.381l159.864,276.885    H23.599z"></path>
+          <path d="M174.826,136.801v123.893c0,4.773,3.867,8.638,8.638,8.638c4.77,0,8.637-3.863,8.637-8.638V136.801    c0-4.766-3.867-8.637-8.637-8.637C178.693,128.165,174.826,132.036,174.826,136.801z"></path>
+          <path d="M183.464,279.393c-5.922,0-10.725,4.8-10.725,10.722s4.803,10.729,10.725,10.729c5.921,0,10.725-4.809,10.725-10.729    C194.189,284.193,189.386,279.393,183.464,279.393z"></path>
+         </g>
+        </g>
+      </svg>
+    </div>
+    <h2 class="error-title">Something went wrong!</h2>
+    <p class="error-message">Some error occured while loading page for you. Please try again.</p>
+    <div class="btn-wrap">
+      <a href="https://www.hackerrank.com/challenges/py-if-else/submissions/code/86396003#" onclick="window.location.reload(true);"><button class="btn-reload">Reload</button></a>
+    </div>
+  </div>
+</div>
+<script>
+  if(typeof cdnLoaded !== 'undefined' && cdnLoaded === false){
+    document.querySelector('.cdn-error-view').style.display = 'block';
+  }
+</script>
+
+  <div id="fb-root"></div>
+  
+
+  <!-- Just a placeholder div to start loading open sans and source code loader -->
+  <div class="font-open-sans-loader"></div>
+  <div class="font-source-code-loader"></div>
+  <!-- Just a placeholder div to start loading open sans and source code loader end -->
+
+  <div id="content" onclick="void(0);"><div class="body-wrap  community-page challenges-page submissiondetail-page show-cookie-banner"><div class="toast-message loading"><span class="toast-container containment"><i class="ui-icon-loading"></i><span class="toast-text">Loading...</span></span></div><div class="theme-m new-design logged-user"><div class="page-header-wrapper theme-m-section"><nav class="community-header"><div class="container"><div class="header-nav-links theme-m-section"><ul class="nav-links"><li class="nav-link-item logo-wrap"><a class="nav_link backbone logo_mark js_logo_mark logo-link" data-analytics="NavBarLogo" data-attr1="/dashboard" href="https://www.hackerrank.com/dashboard"><img id="feed-intro" class="logo-img-small" src="./Python If-Else _ HackerRank_files/h_mark_sm-9c05999c62674028552f4e813728e591.svg" alt=""></a></li><li class="nav-link-item"><a class="nav-link dashboard active" data-analytics="NavBarDomains" href="https://www.hackerrank.com/dashboard"><span>Practice</span></a></li><li class="nav-link-item"><a class="nav-link contests" data-analytics="NavBarContests" href="https://www.hackerrank.com/contests"><span>Compete</span></a></li><li class="nav-link-item"><a class="nav-link" data-analytics="NavBarJobs" href="https://www.hackerrank.com/jobs"><span>Jobs</span><i class="icon-circle js-jobs-notification navigation-highlight-icon hidden"></i></a></li><li class="nav-link-item"><a class="nav-link" data-analytics="NavBarLeaderboard" id="leaderboard-nav-link" href="https://www.hackerrank.com/leaderboard"><span>Leaderboard</span></a></li></ul></div><div class="nav-buttons theme-m-section"><ul class="pull-left psR"><li class="hide-in-private-contest search-input-container input-icon main-hr-search" id="search-span"><div class="search-form new-search"><div><div class="search-query asyn-autocomplete autocomplete"><div class="ac-input-wrap cf"><input autocomplete="off" class="ac-input " value="" placeholder="Search"></div></div><i class="ui-icon-search"></i></div></div></li></ul><ul class="pull-left nav-wrap mmL"><li class="hide-in-private-contest button-item"><div class="dropdown dropdown message-dropdown notify-dropdown theme-m-content"><a class="cursor dropdown-handle nav_link hr_nav_messages_link js-dropdown-toggle js-link" data-analytics="NavBarMessageIcon"><i class="dropdown-icon ui-icon-message"></i></a><div class="dropdown-menu large"><header class="psT psB text-center menu-header"><strong class="header-title">Messages</strong></header><div id="notify_messages" class="dropdown-body"><div class="hr_nav_messages_list"><div class="no-propagation text-center txt-navy empty-msg">You have no unread messages.</div></div></div><footer class="final text-center show-all"><a class="btn show-all-link" href="https://www.hackerrank.com/inbox" data-analytics="NavBarMessageShowAll">Show All</a></footer></div></div></li><li class="button-item"><div class="dropdown dropdown notification-dropdown notify-dropdown theme-m-content"><a class="cursor dropdown-handle nav_link hr_nav_notifications_link js-dropdown-toggle js-link" data-toggle="dropdown" data-analytics="NavBarNotificationsIcon"><i class="dropdown-icon ui-icon-notification"></i><span class="indicator number-indicator hr_notifications_count">1</span></a><div class="dropdown-menu large" id="notify_broadcasts"><header class="psA menu-header"><strong class="header-title">Notifications</strong><a class="hr_archive_all archive pull-right js-link" data-analytics="NavBarNotificationsArchiveAll"><i class="icon-folder-open"></i>Archive All</a></header><div class="clearfix dropdown-body"><div class="hr_nav_notifications_list"><ul><li class="notify_item dropdown-item cursor" data-id="69288153" data-category="special-announcement" data-url="https://www.research.net/r/DeveloperSkills2018?utm_source=IPN&amp;medium=display&amp;content=notification_vA"><div class="notification-icon"><img src="./Python If-Else _ HackerRank_files/notifymarker-72a631c740640b69e5d277569c59b97e.png"></div><div class="notification-subject pmT"><div class="psA"><div>You're invited to participate in our 2018 Developer Skills Survey!</div><small class="meta"><time class="time-text" datetime="2018-11-15T06:54:29.000Z" title="2018-11-15 06:54">1 week ago</time></small></div></div></li></ul></div></div><footer class="final show-all"><a class="btn show-all-link" href="https://www.hackerrank.com/notifications" data-analytics="NavBarNotificationsShowAll">Show All</a></footer></div></div></li><li class="button-item"><div class="dropdown dropdown dropdown-auth profile-menu cursor theme-m-content"><a class="backbone nav_link js-dropdown-toggle js-link toggle-wrap" data-analytics="NavBarProfileDropDown"><i class="ui-icon-user default-user-icon"></i><span class="mmR username text-ellipsis">srilakshmiomkar</span><i class="ui-icon-chevron-down down-icon"></i></a><div class="dropdown-menu drop-list pull-right"><ul><li class="hide-in-private-contest profile-nav-item"><a class="navigation_hackos hackos-count" data-analytics="NavBarProfileDropDownHackos" href="https://www.hackerrank.com/srilakshmiomkar/hackos">Hackos: <span class="navigation_hackos-count">758</span></a></li><li class="hide-in-private-contest profile-nav-item"><a rel="tooltip" data-placement="left" data-analytics="NavBarProfileDropDownProfile" href="https://www.hackerrank.com/srilakshmiomkar">Profile<div class="ui-progress-bar progress-bar theme-default"><div class="progress-filler" style="width:30%"></div></div></a></li><li class="hide-in-private-contest profile-nav-item"><a href="https://www.hackerrank.com/settings/profile" data-analytics="NavBarProfileDropDownSettings">Settings</a></li><li class="hide-in-private-contest profile-nav-item"><a href="https://www.hackerrank.com/challenges/bookmarks" data-analytics="NavBarDropDownBookmarks">Bookmarks</a></li><li class="hide-in-private-contest profile-nav-item"><a href="https://www.hackerrank.com/network" data-analytics="NavBarProfileDropDownNetwork">Network</a></li><li class="hide-in-private-contest profile-nav-item"><a href="https://www.hackerrank.com/submissions" data-analytics="NavBarProfileDropDownSubmissions">Submissions</a></li><li class="hide-in-private-contest profile-nav-item"><a href="https://www.hackerrank.com/administration" data-analytics="NavBarProfileDropDownAdministration">Administration</a></li><li class="profile-nav-item"><a class="logout-button js-link" data-analytics="NavBarProfileDropDownLogout">Logout</a></li></ul></div></div></li></ul></div></div></nav></div><header class="community-header-breadcrumb"><div class="container"><div class="d-flex justify-content-between align-items-center content-header-wrapper"><div class="community-header-breadcrumb-items"><ol itemtype="http://schema.org/BreadcrumbList" class="community-breadcrumb text-content"><li itemprop="itemListElement" itemtype="http://schema.org/ListItem" class="breadcrumb-item"><a itemprop="item" class="breadcrumb-link" data-analytics="Breadcrumb" data-attr1="Practice" data-attr2="global" data-attr7="1" href="https://www.hackerrank.com/dashboard"><span itemprop="name" class="breadcrumb-item-text">Practice</span></a><meta itemprop="position" content="1"></li><li itemprop="itemListElement" itemtype="http://schema.org/ListItem" class="breadcrumb-item"><span class="ui-icon-chevron-right mmL mmR chevron-icon"></span><a itemprop="item" class="breadcrumb-link" data-analytics="Breadcrumb" data-attr1="Python" data-attr2="global" data-attr7="1" href="https://www.hackerrank.com/domains/python"><span itemprop="name" class="breadcrumb-item-text">Python</span></a><meta itemprop="position" content="1"></li><li itemprop="itemListElement" itemtype="http://schema.org/ListItem" class="breadcrumb-item"><span class="ui-icon-chevron-right mmL mmR chevron-icon"></span><a itemprop="item" class="breadcrumb-link" data-analytics="Breadcrumb" data-attr1="Introduction" data-attr2="global" data-attr7="1" href="https://www.hackerrank.com/domains/python/py-introduction"><span itemprop="name" class="breadcrumb-item-text">Introduction</span></a><meta itemprop="position" content="1"></li><li itemprop="itemListElement" itemtype="http://schema.org/ListItem" class="breadcrumb-item"><span class="ui-icon-chevron-right mmL mmR chevron-icon"></span><span itemprop="name" class="breadcrumb-item-text">Python If-Else</span><meta itemprop="position" content="1"></li></ol><div class="page-label-wrapper text-headline"><h1 class="page-label"><div class="challenge-page-label-wrapper align-items-center"><h1 class="ui-icon-label page-label">Python If-Else<i class="icon-bookmark ui-icon-star txt-grey"></i></h1></div></h1></div></div><div class="community-header-aside"><div class="challange-header-aside"><div class="track-badge-progress"><div class="badge-progress"><div class="remaining"><div class="point-left-wrap"><span class="point-left">40 more points</span> to get your next star!</div><div class="track-progress-bar"><div class="ui-progress-bar progress-bar theme-default"><div class="progress-filler" style="width:64%"></div></div></div><div class="score-info"><span class="current-rank">Rank: <span class="value">70140</span></span><span class="pipe">|</span><span class="current-points">Points: <span class="value">180/220</span></span><a class="scoring-link" data-analytics="BadgeLearnMoreLink" data-attr1="python" target="_blank" href="https://www.hackerrank.com/scoring"><i class="scoring-icon ui-icon-warning-hexagon"></i></a></div></div><div location="[object Object]" params="[object Object]" router="[object Object]" class="ui-badge level-silver"><div class="ui-badge-wrap"><svg viewBox="0 0 91.66667 100" class="hexagon"><g><defs><lineargradient id="badge-silver-gradient" x1="52.5" y1="2.5" x2="52.5" y2="102.5" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#cee3eb"></stop><stop offset="1" stop-color="#aec8c7"></stop></lineargradient></defs><path fill="url(#badge-silver-gradient)" d="M98.28277,47.36h0c-.18459-9.382-.87983-17.797-2.0917-19.8595-1.02214-1.742-6.1721-5.43476-12.6195-9.45853L66.3804,8.23311C59.94162,4.89541,54.4699,2.5,52.49778,2.5c-2.42987,0-10.17687,3.63131-18.49789,8.18049-6.30411,3.44623-12.9328,7.41557-17.83631,10.74623-3.85037,2.61278-6.63864,4.828-7.35893,6.07393-.73574,1.27216-1.28014,4.91124-1.63613,9.67794l-.00014-.00008c-.45195,6.03951-.599,13.88935-.43933,21.10033.20233,9.11082.89243,17.18541,2.07561,19.22049C11.66541,82.42328,46.78277,102.5,52.49778,102.5c2.374,0,9.82245-3.47115,17.92388-7.87722,6.4-3.48081,13.19866-7.5418,18.23618-10.9459l-.00046-.00026c3.93694-2.6605,6.80064-4.91944,7.53385-6.17728.72907-1.2482,1.27024-4.80557,1.62881-9.48065l-.00014-.00008C98.269,62.13222,98.42408,54.47227,98.28277,47.36Z" transform="translate(-6.66667 -2.5)"></path></g><image class="badge-icon" xlink:href="https://hrcdn.net/hackerrank/assets/badges/python-828160c3e8145653f19edb553b2c21ed.svg" x="50%" y="22" height="27" width="27" transform="translate(-13.5, 0)"></image><text class="badge-title" x="50%" y="65.5" font-size="10">Python</text><g class="star-section" transform="translate(-12.5, 0)"><svg x="50%" y="71" height="10"><svg class="badge-star" viewBox="0 0 6.54904 6.25825" width="7" x="0"><path class="star" d="M55.51425,77.01983l-1.89417-.275-.84833-1.7175a.299.299,0,0,0-.27167-.16917.3245.3245,0,0,0-.2725.16917l-.305.61833-.5425,1.09916-.51417.075-1.38.2a.30333.30333,0,0,0-.18583.10083.33411.33411,0,0,0-.045.06833.35631.35631,0,0,0-.02417.07667.34087.34087,0,0,0-.005.04083.3038.3038,0,0,0,.02417.13417.33341.33341,0,0,0,.06667.0975l1.37167,1.33667-.2875,1.67167-.03667.21417c-.00167.01-.00167.02-.0025.02917l-.00167.0175a.26453.26453,0,0,0,.00167.04417.30489.30489,0,0,0,.44417.22917l1.69417-.89,1.69416.89a.30352.30352,0,0,0,.44084-.32L54.31175,78.874l1.37083-1.33667a.30339.30339,0,0,0-.16833-.5175" transform="translate(-49.22548 -74.85817)"></path></svg><svg class="badge-star" viewBox="0 0 6.54904 6.25825" width="7" x="9"><path class="star" d="M55.51425,77.01983l-1.89417-.275-.84833-1.7175a.299.299,0,0,0-.27167-.16917.3245.3245,0,0,0-.2725.16917l-.305.61833-.5425,1.09916-.51417.075-1.38.2a.30333.30333,0,0,0-.18583.10083.33411.33411,0,0,0-.045.06833.35631.35631,0,0,0-.02417.07667.34087.34087,0,0,0-.005.04083.3038.3038,0,0,0,.02417.13417.33341.33341,0,0,0,.06667.0975l1.37167,1.33667-.2875,1.67167-.03667.21417c-.00167.01-.00167.02-.0025.02917l-.00167.0175a.26453.26453,0,0,0,.00167.04417.30489.30489,0,0,0,.44417.22917l1.69417-.89,1.69416.89a.30352.30352,0,0,0,.44084-.32L54.31175,78.874l1.37083-1.33667a.30339.30339,0,0,0-.16833-.5175" transform="translate(-49.22548 -74.85817)"></path></svg><svg class="badge-star" viewBox="0 0 6.54904 6.25825" width="7" x="18"><path class="star" d="M55.51425,77.01983l-1.89417-.275-.84833-1.7175a.299.299,0,0,0-.27167-.16917.3245.3245,0,0,0-.2725.16917l-.305.61833-.5425,1.09916-.51417.075-1.38.2a.30333.30333,0,0,0-.18583.10083.33411.33411,0,0,0-.045.06833.35631.35631,0,0,0-.02417.07667.34087.34087,0,0,0-.005.04083.3038.3038,0,0,0,.02417.13417.33341.33341,0,0,0,.06667.0975l1.37167,1.33667-.2875,1.67167-.03667.21417c-.00167.01-.00167.02-.0025.02917l-.00167.0175a.26453.26453,0,0,0,.00167.04417.30489.30489,0,0,0,.44417.22917l1.69417-.89,1.69416.89a.30352.30352,0,0,0,.44084-.32L54.31175,78.874l1.37083-1.33667a.30339.30339,0,0,0-.16833-.5175" transform="translate(-49.22548 -74.85817)"></path></svg></svg></g></svg></div></div></div></div></div></div></div></div></header><div class="container"></div><div class="community-content"><div class="challenge-view theme-m"><div class="challenge-page-header container"><div class="ui-tabs-wrap"><div class="render-list clearfix"><ul class="tab-header"><li id="Problem" class="tab-item"><a class="tab-item-color" data-analytics="ChallengeViewTab" data-attr1="/challenges/py-if-else/problem" data-attr2="Problem" href="https://www.hackerrank.com/challenges/py-if-else/problem"><span class="ui-icon-label">Problem</span></a></li><li id="Submissions" class="tab-item active"><a class="tab-item-color" data-analytics="ChallengeViewTab" data-attr1="/challenges/py-if-else/submissions" data-attr2="Submissions" href="https://www.hackerrank.com/challenges/py-if-else/submissions"><span class="ui-icon-label">Submissions</span></a></li><li id="Leaderboard" class="tab-item"><a class="tab-item-color" data-analytics="ChallengeViewTab" data-attr1="/challenges/py-if-else/leaderboard" data-attr2="Leaderboard" href="https://www.hackerrank.com/challenges/py-if-else/leaderboard"><span class="ui-icon-label">Leaderboard</span></a></li><li id="Discussions" class="tab-item"><a class="tab-item-color" data-analytics="ChallengeViewTab" data-attr1="/challenges/py-if-else/forum" data-attr2="Discussions" href="https://www.hackerrank.com/challenges/py-if-else/forum"><span class="ui-icon-label">Discussions</span></a></li><li id="Editorial" class="tab-item"><a class="tab-item-color" data-analytics="ChallengeViewTab" data-attr1="/challenges/py-if-else/editorial" data-attr2="Editorial" href="https://www.hackerrank.com/challenges/py-if-else/editorial"><span class="ui-icon-label">Editorial</span></a></li><li id="Tutorial" class="tab-item"><a class="tab-item-color" data-analytics="ChallengeViewTab" data-attr1="/challenges/py-if-else/tutorial" data-attr2="Tutorial" href="https://www.hackerrank.com/challenges/py-if-else/tutorial"><span class="ui-icon-label">Tutorial</span></a></li></ul></div></div></div><div class="container submission-detail-wrapper"><div class="panes-container"><div class="left-pane"><div class="ui-tabs-wrap"><div class="tab-list-content tab-content"><section class="submission-details mjB"><div class="submission-header"><div class="submitted-at">You made this submission 2 months ago.</div><div class="submission-score"><label class="label">Score:</label><span class="value">10.00</span></div><div class="status-wrap"><label class="label">Status:</label><span class="value success">Accepted</span></div></div><div class="submission-recommendation"><p class="recommend-text">People who solved <strong>Python If-Else</strong> attempted this next:</p><a class="challenge-link" target="_blank" href="https://www.hackerrank.com/challenges/python-sort-sort?h_r=next-challenge&amp;h_v=legacy"><div class="recommendation-card"><div class="challenge-desc"><div class="challenge-name">Athlete Sort</div><div class="challenge-preview">Sort the table on the kth attribute.</div></div><div class="challenge-btn-wrap"><button class="ui-btn ui-btn-normal ui-btn-primary" tabindex="0"><div class="ui-content align-icon-right"><span class="ui-text">Solve Challenge</span></div></button></div></div></a></div><div><div id="js-friends-leaderboard"></div><div class="code-block"><h3 class="section-title">Submitted Code</h3><div class="code-wrap"><div class="submission-code-head"><div class="head-left"><span><strong>Language:</strong> <!-- -->Python 3</span></div><div class="head-right"><a class="small cursor text-link" data-analytics="SubmissionViewOpenInEditor" data-attr1="py-if-else" data-attr2="python3" data-attr3="code" href="https://www.hackerrank.com/challenges/py-if-else/copy-from/86396003"><i class="ui-icon-fork"></i>Open in editor</a></div></div><div class="code-viewer"><div class="CodeMirror cm-s-default CodeMirror-wrap CodeMirror-focused"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 34px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;" tabindex="0"></textarea></div><div class="CodeMirror-vscrollbar" tabindex="-1" cm-not-content="true"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" tabindex="-1" cm-not-content="true"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 30px; margin-bottom: -15px; border-right-width: 15px; min-height: 255px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre>x</pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"><div class="CodeMirror-selected" style="position: absolute; left: 4px; top: 0px; width: 790px; height: 19px;"></div><div class="CodeMirror-selected" style="position: absolute; left: 4px; top: 209px; width: 0px; height: 19px;"></div><div class="CodeMirror-selected" style="position: absolute; left: 4px; top: 19px; width: 790px; height: 190px;"></div></div><div class="CodeMirror-cursors" style="visibility: hidden;"></div><div class="CodeMirror-code" role="presentation" style=""><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -30px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">#!/bin/python3</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -30px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -30px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">N</span> <span class="cm-operator">=</span> <span class="cm-builtin">int</span>(<span class="cm-builtin">input</span>())</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -30px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">if</span>(<span class="cm-variable">N</span> <span class="cm-operator">%</span> <span class="cm-number">2</span> <span class="cm-operator">==</span> <span class="cm-number">1</span>):</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -30px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">5</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-builtin">print</span>(<span class="cm-string">"Weird"</span>)</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -30px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">6</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">elif</span>(<span class="cm-variable">N</span> <span class="cm-operator">%</span> <span class="cm-number">2</span> <span class="cm-operator">==</span> <span class="cm-number">0</span> <span class="cm-keyword">and</span> <span class="cm-variable">N</span> <span class="cm-operator">&gt;=</span> <span class="cm-number">2</span> <span class="cm-keyword">and</span> <span class="cm-variable">N</span> <span class="cm-operator">&lt;</span> <span class="cm-number">5</span>):</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -30px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">7</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-builtin">print</span>(<span class="cm-string">"Not Weird"</span>)</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -30px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">8</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">elif</span>(<span class="cm-variable">N</span> <span class="cm-operator">%</span> <span class="cm-number">2</span> <span class="cm-operator">==</span> <span class="cm-number">0</span> <span class="cm-keyword">and</span> <span class="cm-variable">N</span> <span class="cm-operator">&gt;=</span><span class="cm-number">6</span> <span class="cm-keyword">and</span> <span class="cm-variable">N</span> <span class="cm-operator">&lt;=</span> <span class="cm-number">20</span>):</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -30px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">9</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-builtin">print</span>(<span class="cm-string">"Weird"</span>)</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -30px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">10</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">else</span>:</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -30px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">11</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-builtin">print</span>(<span class="cm-string">"Not Weird"</span>)</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -30px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">12</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -30px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">13</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 15px; width: 1px; border-bottom: 0px solid transparent; top: 255px;"></div><div class="CodeMirror-gutters" style="height: 270px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 29px;"></div></div></div></div></div></div></div></div></section></div></div><div class="submission-status theme-m-content in-submission"><div class="challenge-submission-wrapper"><div class="testcase-header"><div class="testcase-results"><div class="tc-container"><div class="ui-tabs-wrap testcases-result-wrapper theme-m vertical-layout"><div class="render-list clearfix"><ul class="tab-header"><li id="Test case 0" class="tab-item active"><a data-attr2="master" data-attr3="py-if-else" data-analytics="TestCaseResultsTab" data-attr1="SubmitCode" data-attr5="0" class="tab-item-color-success"><span class="ui-icon-label tab-item-label">Test case 0</span><i class="ui-icon-check-circle"></i></a></li><li id="Test case 1" class="tab-item"><a data-attr2="master" data-attr3="py-if-else" data-analytics="TestCaseResultsTab" data-attr1="SubmitCode" data-attr5="0" class="tab-item-color-success"><span class="ui-icon-label tab-item-label">Test case 1</span><i class="ui-icon-check-circle"></i></a></li><li id="Test case 2" class="tab-item"><a data-attr2="master" data-attr3="py-if-else" data-analytics="TestCaseResultsTab" data-attr1="SubmitCode" data-attr5="0" class="tab-item-color-success"><span class="ui-icon-label tab-item-label">Test case 2</span><i class="ui-icon-check-circle"></i></a></li><li id="Test case 3" class="tab-item"><a data-attr2="master" data-attr3="py-if-else" data-analytics="TestCaseResultsTab" data-attr1="SubmitCode" data-attr5="0" class="tab-item-color-success"><span class="ui-icon-label tab-item-label">Test case 3</span><i class="ui-icon-check-circle"></i></a></li><li id="Test case 4" class="tab-item"><a data-attr2="master" data-attr3="py-if-else" data-analytics="TestCaseResultsTab" data-attr1="SubmitCode" data-attr5="0" class="tab-item-color-success"><span class="ui-icon-label tab-item-label">Test case 4</span><i class="ui-icon-check-circle"></i></a></li><li id="Test case 5" class="tab-item"><a data-attr2="master" data-attr3="py-if-else" data-analytics="TestCaseResultsTab" data-attr1="SubmitCode" data-attr5="0" class="tab-item-color-success"><span class="ui-icon-label tab-item-label">Test case 5</span><i class="ui-icon-check-circle"></i></a></li><li id="Test case 6" class="tab-item"><a data-attr2="master" data-attr3="py-if-else" data-analytics="TestCaseResultsTab" data-attr1="SubmitCode" data-attr5="0" class="tab-item-color-success"><span class="ui-icon-label tab-item-label">Test case 6</span><i class="ui-icon-check-circle"></i></a></li><li id="Test case 7" class="tab-item"><a data-attr2="master" data-attr3="py-if-else" data-analytics="TestCaseResultsTab" data-attr1="SubmitCode" data-attr5="0" class="tab-item-color-success"><span class="ui-icon-label tab-item-label">Test case 7</span><i class="ui-icon-check-circle"></i></a></li></ul></div><div class="tab-list-content tab-content tab-pane-success d-flex"><div class="tab-pane-content"><div class="flex-block compilation-time-response full-width flex-column"><div class="compiler-message run-time-message flex-display"><div class="compile-field-label">Compiler Message</div><pre class="compile-output-message"><code class="bold">Success</code></pre></div><div class="stdin run-time-message flex-display"><div class="compile-field-label">Input (stdin)<a data-attr2="master" data-attr3="py-if-else" data-analytics="DownloadTestcase" data-attr1="SubmitCode" data-attr4="stdin" data-attr7="0" data-attr6="right" class="text-link tc-download-link">Download</a></div><pre class="compile-output-message"><code class="bold">3</code></pre></div><div class="expected-output run-time-message flex-display"><div class="compile-field-label">Expected Output<a data-attr2="master" data-attr3="py-if-else" data-analytics="DownloadTestcase" data-attr1="SubmitCode" data-attr4="expected-output" data-attr7="0" data-attr6="right" class="text-link tc-download-link">Download</a></div><pre class="compile-output-message"><code class="bold">Weird</code></pre></div></div></div></div></div></div></div></div></div></div></div><aside class="right-pane challenge-sidebar"><div class="challenge-sidebar-help"><h2 class="text-sec-headline-s">Need Help?</h2><hr class="hr-line-light"><div class="mlB"><div class="link-wrapper"><a data-analytics="ChallengeSidebarUI" data-attr1="tutorial" data-attr2="py-if-else" data-attr3="master" href="https://www.hackerrank.com/challenges/py-if-else/tutorial"><i class="ui-icon-tutorial ui-icon-grey sidebar-icon"></i><span class="ui-icon-label">View tutorial</span></a></div><div class="link-wrapper"><a data-analytics="ChallengeSidebarUI" data-attr1="discussions" data-attr2="py-if-else" data-attr3="master" href="https://www.hackerrank.com/challenges/py-if-else/forum"><i class="ui-icon-discussion ui-icon-grey sidebar-icon"></i><span class="ui-icon-label">View discussions</span></a></div><div class="link-wrapper"><a data-analytics="ChallengeSidebarUI" data-attr1="editorial" data-attr2="py-if-else" data-attr3="master" href="https://www.hackerrank.com/challenges/py-if-else/editorial"><i class="ui-icon-editorial ui-icon-grey sidebar-icon"></i><span class="ui-icon-label">View editorial</span></a></div><div class="link-wrapper"><a data-analytics="ChallengeSidebarUI" data-attr1="topscorers" data-attr2="py-if-else" data-attr3="master" href="https://www.hackerrank.com/challenges/py-if-else/leaderboard"><i class="ui-icon-trophy ui-icon-grey sidebar-icon"></i><span class="ui-icon-label">View top submissions</span></a></div></div></div></aside></div></div></div></div><footer class="community-footer"><ul class="footer-links"><li class="link-item"><a target="_blank" class="footer-link calendar" data-analytics="FooterLinkCalendar" href="https://www.hackerrank.com/calendar">Contest Calendar</a></li><li class="link-item"><a target="_blank" class="footer-link blog" data-analytics="FooterLinkBlog" href="https://blog.hackerrank.com/">Blog</a></li><li class="link-item"><a target="_blank" class="footer-link scoring" data-analytics="FooterLinkScoring" href="https://www.hackerrank.com/scoring">Scoring</a></li><li class="link-item"><a target="_blank" class="footer-link environment" data-analytics="FooterLinkEnvironment" href="https://www.hackerrank.com/environment">Environment</a></li><li class="link-item"><a target="_blank" class="footer-link faq" data-analytics="FooterLinkFAQ" href="https://www.hackerrank.com/faq">FAQ</a></li><li class="link-item"><a target="_blank" class="footer-link" data-analytics="FooterLinkAboutUs" href="https://www.hackerrank.com/aboutus">About Us</a></li><li class="link-item"><a target="_blank" class="footer-link" data-analytics="FooterLinkSupport" href="https://help.hackerrank.com/hc/en-us">Support</a></li><li class="link-item"><a target="_blank" class="footer-link" data-analytics="FooterLinkCareers" href="https://www.hackerrank.com/careers">Careers</a></li><li class="link-item"><a target="_blank" class="footer-link" data-analytics="FooterLinkTermsOfService" href="https://www.hackerrank.com/terms-of-service">Terms Of Service</a></li><li class="link-item"><a target="_blank" class="footer-link" data-analytics="FooterLinkPrivacyPolicy" href="https://www.hackerrank.com/privacy">Privacy Policy</a></li><li class="link-item"><a target="_blank" class="footer-link featureRequestButton" data-analytics="FooterLinkFeatureRequest" href="https://www.hackerrank.com/support/feature">Request a Feature</a></li></ul></footer></div></div></div><!--Required to handle event bubbling of click in ios safari -->
+
+  <script>
+    //HR namespace
+    var HR = {};
+    HR.development = false;
+    HR.assetPath = 'https://hrcdn.net/hackerrank/assets/';
+    HR.pageLoadTime = Date.now();
+    HR.productNamespace = 'hackerrank';
+    HR.production = true;
+    HR.devServer = false;
+    HR.isIsomorphic = true;
+    HR.loadedWithOldCss = false;
+    HR.pusher = '{"key":"a280047e3b323ccb1b65","cluster":"mt1"}';
+  </script>
+
+  <!-- Vendor scripts -->
+  
+    <script src="./Python If-Else _ HackerRank_files/hackerrank_r_vendor-3d37012dfd.js"></script>
+  
+
+  
+  <script src="./Python If-Else _ HackerRank_files/runtime-597735d06e945e5bf761.js"></script>
+  <script src="./Python If-Else _ HackerRank_files/hackerrank_r_app-9555e8abc5f8e5925e02.js"></script>
+  
+<script>
+  var getUser = (function() {
+    var userData;
+    $(window).on('initializeNewUser', function(e, user) {
+      userData = user;
+    });
+    try{
+      if (typeof userData === 'undefined') {
+        userData = JSON.parse(decodeURI($('#initialUserData').html()));
+        $('#initialUserData').remove();
+      }
+    } catch(e){
+      userData = {};
+      console.log('No initial User data found');
+    }
+    return function() {
+      return userData;
+    }
+  })();
+</script>
+
+<!-- setting up sentry -->
+
+  <script src="./Python If-Else _ HackerRank_files/raven.min.js" async="" crossorigin="anonymous" id="raven"></script>
+  <script>
+    (function(window, queue, loaded, script, user) {
+
+        var setupRaven = function(user) {
+          var userContext = {};
+          if (user && !!user.id) {
+            userContext.handle = user.id;
+          }
+          var extraContext = {
+            cdnUrl: Cookies.get("cdn_url")
+          }
+          if (Cookies) {
+            if (HR.productNamespace === 'hackerrank') {
+              extraContext.mixpanel_token = Cookies.get('hackerrank_mixpanel_token')
+            } else if (HR.productNamespace === 'hackerrankx') {
+              extraContext.mixpanel_token = Cookies.get('hackerrankx_mixpanel_token')
+            }
+          }
+          if(typeof Raven !== 'undefined') {
+            Raven.setUserContext(userContext);
+            Raven.setExtraContext(extraContext);
+          }
+        }
+        $(window).on('initializeNewUser', function(e, user) {
+          setupRaven(user);
+        });
+
+        window.onerror = function e(message, file, lineNo, columnNo, error) {
+            if (loaded) return;
+            queue.push([message, file, lineNo, columnNo, error]);
+        };
+
+        window.onunhandledrejection = function e(error) {
+            if (loaded) return;
+            queue.push([
+                error.reason,
+            ]);
+        };
+
+        script.onreadystatechange = script.onload = function() {
+            if (loaded) return;
+            loaded = true;
+
+            Raven.config('https://6b2d52b23d5a4dd4bc44330335327c04@sentry.io/234162', {
+                release: "36afa90767a3051574571087c839e919068633fd",
+                ignoreUrls: [/cdn\.userty\.com/]
+            }).install();
+
+            setupRaven(user);
+
+            window.onunhandledrejection = function e(error) {
+                Raven.captureException(error.reason, {
+                    extra: {
+                        type: error.type,
+                    },
+                });
+            };
+
+            queue.forEach(function(error) {
+                Raven.captureException(error[4] || error[0], {
+                    extra: {
+                        file: error[1],
+                        line: error[2],
+                        col: error[3],
+                    },
+                });
+            });
+        };
+    }(window, [], false, document.getElementById('raven'), getUser()));
+ </script>
+
+
+
+
+<!-- google analytics tracking -->
+<script>
+  var _gaq = _gaq || [];
+  
+  _gaq.push(['candidate_company._setAccount', 'UA-45092266-1']);
+  _gaq.push(['candidate_company._trackPageview']);
+  _gaq.push(['candidate_company._gat._anonymizeIp']);
+  _gaq.push(['_setCampSourceKey', 'utm_source']);
+  _gaq.push(['_setCampMediumKey', 'utm_medium']);
+  _gaq.push(['_setCampContentKey', 'utm_keyword']);
+  _gaq.push(['_setCampTermKey', 'utm_keyword']);
+  _gaq.push(['_setCampNameKey', 'utm_campaign']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  
+</script>
+<!-- Pending candidate site custom GA code -->
+<!-- google analytics tracking end-->
+
+<!-- mixpanel tracking -->
+<script type="text/javascript">
+  
+    (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+    mixpanel.init("bcb75af88bccc92724ac5fd79271e1ff");
+
+    
+      
+        mixpanel.init("86cf4681911d3ff600208fdc823c5ff5", {}, "jobs_test");
+      
+      mixpanel.identify(Cookies.get("hackerrank_mixpanel_token"));
+    
+  
+</script>
+<!-- mixpanel tracking end-->
+
+<!-- auryc tracking start -->
+<script type="text/javascript">
+  
+    function aurycProps(user) {
+      if(HR.productNamespace === 'hackerrankx') {
+        userProps = {
+          user_role: user.role,
+          company_id: user.company.id,
+          plan_name: user.company.plan_name
+        }
+      } else if (HR.productNamespace === 'hackerrank') {
+        userProps = {
+          user_id: user.id,
+        };
+      } else {
+        userProps = {};
+      }
+      return userProps;
+    }
+
+    function setupAurycProps(aurycId, user) {
+      userProps = aurycProps(user);
+      window.auryc.identify(aurycId);
+      window.auryc.addUserProperties(userProps);
+      window.auryc.setFeedbackEnabled(!!user.enable_nps_survey);
+      window.auryc.addSessionProperties({productNamespace: HR.productNamespace});
+    }
+
+    setupAuryc = function(user) {
+      hackerrankxAurycSrc = "//cdn.userty.com/207-hackerrankcom/container.js";
+      hackerrankAurycSrc = "//cdn.userty.com/531-hackerrankCommunity/container.js";
+      if(HR.productNamespace === 'hackerrankx') {
+        if (!user || !!Cookies.get('admin_su') || user.disable_auryc) return;
+        src = hackerrankxAurycSrc;
+        aurycId = user.id.toString();
+      } else if(HR.productNamespace === 'hackerrank' && true ) {
+        if (!(user && user.id)) return;
+        src = hackerrankAurycSrc;
+        aurycId = user.id.toString();
+      } else {
+        return;
+      }
+
+      ;(function (g) { g.aurycReadyCb = g.aurycReadyCb || []; var d = document, i, am = d.createElement("script"), h = d.head || d.getElementsByTagName("head")[0],aex = { "src": src, "data-cfasync": "false", "async": "true", "defer": "true", "data-vendor": "userty", "data-role": "container", "charset": "utf-8" }; for (var attr in aex) { am.setAttribute(attr,aex[attr]); } h.appendChild(am); })(window);
+
+      if (window.auryc) {
+        setupAurycProps(aurycId, user)
+      } else if (window.aurycReadyCb) {
+        window.aurycReadyCb.push(function() {
+          setupAurycProps(aurycId, user)
+        })
+      }
+    }
+
+    setupAuryc(getUser());
+    $(window).on('initializeNewUser', function(e, user) {
+      setupAuryc(user);
+    });
+  
+</script>
+<!-- auryc tracking end -->
+
+<!-- Marketo to be added later -->
+
+
+
+<!-- Bizible -->
+
+<!-- HR metrics init -->
+<script type="text/javascript">
+
+  (function() {
+    hr_metrics.init({
+      product: 'hackerrank',
+      use_cookie: true,
+      uid_cookie_key: 'hackerrank_mixpanel_token',
+      uid_token_cookie_key: 'metrics_user_identifier',
+      session_cookie_key: 'session_id',
+      metrics_endpoint:  'https://metrics.hackerrank.com/metrics' 
+    });
+  })();
+
+  (function(h) {
+    window.hr_metrics = h;
+    if (!h.loaded) {
+      var a = ['track', 'batch_track', 'app_track', 'externalService', 'init', 'batch_track_record', 'track_dwell_time', 'set_navigation_data'];
+      for (var i = 0; i < a.length; i++) {
+        if (!h[a[i]]) {h[a[i]] = function() {};}
+      }
+    }
+  })(window.hr_metrics || {});
+
+
+
+</script>
+
+<!-- hrutm_params -->
+
+<!-- HR metrics extension pack -->
+<script type="text/javascript">
+
+  
+    if (('performance' in window) && ('timing' in window.performance)) {
+      $(window).on("load", function() {
+        setTimeout(function(){
+          var timing = window.performance.timing;
+          var obj = {
+            referring_url: window.location.pathname,
+            fullLoadTime: timing.loadEventEnd - timing.navigationStart,
+            // Total time from req start to load
+            loadTime: timing.loadEventEnd - timing.fetchStart,
+            // Time spent constructing the DOM tree
+            domReadyTime: timing.domComplete - timing.domInteractive,
+            // Time consumed preparing the new page
+            readyStart: timing.fetchStart - timing.navigationStart,
+            // Time spent during redirection
+            redirectTime: timing.redirectEnd - timing.redirectStart,
+            // AppCache
+            appcacheTime: timing.domainLookupStart - timing.fetchStart,
+            // Time spent unloading documents
+            unloadEventTime: timing.unloadEventEnd - timing.unloadEventStart,
+            // DNS query time
+            lookupDomainTime: timing.domainLookupEnd - timing.domainLookupStart,
+            // TCP connection time
+            connectTime: timing.connectEnd - timing.connectStart,
+            // Time spent during the request
+            requestTime: timing.responseEnd - timing.requestStart,
+            // Request to completion of the DOM loading
+            initDomTreeTime: timing.domInteractive - timing.responseEnd,
+            // Load event time
+            loadEventTime: timing.loadEventEnd - timing.loadEventStart,
+            // Origin of the request
+            react: true,
+            //isIsomorphic flag
+            isIsomorphic: window.HR.isIsomorphic,
+            //old css loaded flag
+            loadedWithOldCss: window.HR.loadedWithOldCss,
+          }
+
+          if (('navigation' in window.performance) && ('getEntries' in window.performance)) {
+            obj.navigationType = window.performance.navigation.type;
+            obj.navigationRedirectCount = window.performance.navigation.redirectCount;
+            if (obj.fullLoadTime > 8000) {
+              try {
+                var entries = window.performance.getEntries();
+                if(entries[0].toJSON){
+                  obj.networkRequests = entries.map(function(e) {return e.toJSON();});
+                }
+              } catch (e) {
+                //do nothing
+              }
+            }
+          }
+
+          hr_metrics.app_track('page-load-metrics', obj);
+        }, 1000);
+      });
+    }
+  
+
+  $(window).on("load", function() {
+      var _pathname = document.location.pathname;
+      var cdn_url_switched = Cookies.get("cdn_url_switched");
+      if (cdn_url_switched !== '') {
+        Cookies.remove('cdn_url_switched');
+      }
+      hr_metrics.batch_track('PageLoad', _pathname + document.location.search, {
+          attribute1: _pathname,
+          attribute6: cdn_url_switched,
+          cdn_url: Cookies.get("cdn_url")
+      });
+
+      if (hr_metrics.track_dwell_time) {
+          hr_metrics.track_dwell_time(_pathname);
+          hr_metrics.set_navigation_data();
+      }
+
+      $(window).on('beforeunload', function(){
+
+          var _pathname = document.location.pathname;
+          hr_metrics.batch_track('PageClose', _pathname + document.location.search, {
+              attribute2: _pathname
+          });
+
+          hr_metrics.track_dwell_time(_pathname, true);
+
+          hr_metrics.batch_track_record(true);
+      });
+
+  });
+
+</script>
+
+<!-- Facebook SDK -->
+<!-- Twitter SDK -->
+
+<!-- track button clicks -->
+<script>
+    $(document).on('click', 'a, button, input, select, i, div, span, h5', null, function(e) {
+        var src = e.currentTarget, $src = $(e.currentTarget);
+        if ($src.attr('data-analytics')) {
+            action = 'Click'; data = $src.attr('data-analytics');
+        } else {
+            return;
+        }
+
+        
+          hr_metrics.batch_track(action, data, (function() {
+              var params={};
+              for (var _i=1; _i<=12; ++_i){
+                  var _attr = 'data-attr'+_i;
+                  if ($src.attr(_attr)){
+                    params['attribute'+_i] = $src.attr(_attr);
+                  }
+              }
+              var attributes = src.attributes, attr_length = src.attributes.length;
+              for (var i = 0; i < attr_length; i++){
+                var attribute = attributes[i];
+                if (attribute.name.indexOf('data-attr-') === 0){
+                  param_name = attribute.name.substr('data-attr-'.length);
+                  if (param_name.length > 0) {
+                    params[param_name] = attribute.value;
+                  }
+                }
+              }
+              return params;
+          })());
+        
+
+        
+          // google analytics
+          _gaq.push(['_trackEvent', 'Events' , action, data])
+        
+    });
+
+    $(document).on('AnalyticsEvent', function(e) {
+        action = e.event_type || false;
+        data = e.event_name || false;
+
+        if (!action || !data) {
+          return;
+        }
+
+        params = {}
+        params['attribute1'] = e.event_value || ""
+        params['attribute7'] = e.integer_event_value
+
+        if (window.HR && window.HR.current_page) {
+          params['attribute2'] = window.HR.current_page;
+        }
+
+        if (window.HR && window.HR.current_contest) {
+          params['attribute3'] = window.HR.current_contest.get('name');
+        }
+
+        
+            hr_metrics.batch_track(action, data, params);
+        
+
+        
+          // google analytics
+          _gaq.push(['_trackEvent', 'Events' , action, data]);
+        
+    });
+
+  </script>
+<!-- track button clicks end-->
+
+<!-- Linkedin Insights -->
+
+
+
+
+</body></html>
